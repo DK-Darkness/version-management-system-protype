@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        td {    
+            text-align: center; 
+            vertical-align: middle;
+            border:solid #999;border-width:0 1px 1px 0;padding:2px;
+            }
+        /* tr{border:solid #999;border-width:0 1px 1px 0;padding:2px;} */
+    </style>
+    <title>版本文件</title>
+</head>
+<body>
+    <form action="/add" method='GET'>
+        <input type="submit" value="添加">
+    </form>
+    <hr>
+    <form action="/query" method='POST'>
+        <center>
+        <table>
+            <tr>
+                <td>客户</td><td><input type="text" name="customer"></td>
+                <td>芯片方案</td><td><input type="text" name="chip_num"></td>
+                <td>版本名称</td><td><input type="text" name="ver_name"></td>
+            </tr>
+        </table>
+        </center>
+        <center><input type="submit" value="查询"></center>
+    </form>
+    <hr>
+    <form action="/querygit" method='POST'>
+        <center>
+        <table>
+            <tr>
+                <td>GIT节点</td><td><input type="text" name="git_node"></td>
+            </tr>
+        </table>
+        </center>
+        <center><input type="submit" value="查询"></center>
+    </form>
+    <hr>
+    <center>
+    <table>
+        <tr><td>ID</td><td>客户</td><td>芯片方案</td><td>版本名称</td><td>GIT节点</td><td>Commit 时间</td><td>下载</td><td>删除</td></tr>
+        {% for version in versions %}
+        <tr>
+            <td>{{version.ver_id}}</td>
+            <td>{{version.customer}}</td>
+            <td>{{version.chip_num}}</td>
+            <td>{{version.ver_name}}</td>
+            <td>{{version.git_node}}</td>
+            <td>{{version.commit_time}}</td>
+            <td><a href={{version.file_path}}>下载</a></td>
+            <td>
+                <form action="/delete" method="POST">
+                    <input type="hidden" name="id" value={{version.ver_id}}>
+                    <input type="submit" value="删除">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    </center>
+</body>
+</html>
