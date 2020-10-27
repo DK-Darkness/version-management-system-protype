@@ -20,12 +20,12 @@
     <title>版本文件</title>
 </head>
 <body>
-    <form action="/add" method='GET'>
+    <form action="/twadd" method='GET'>
         <input type="submit" value="添加">
     </form>
-    <a href="/twview"  class="topcorner" >切换为TW版本</a>
+    <a href="/"  class="topcorner" >切换为HT版本</a>
     <hr>
-    <form action="/query" method='POST'>
+    <form action="/twquery" method='POST'>
         <center>
         <table>
             <tr>
@@ -38,33 +38,21 @@
         <center><input type="submit" value="查询"></center>
     </form>
     <hr>
-    <form action="/querygit" method='POST'>
-        <center>
-        <table>
-            <tr>
-                <td>GIT节点</td><td><input type="text" name="git_node"></td>
-            </tr>
-        </table>
-        </center>
-        <center><input type="submit" value="查询"></center>
-    </form>
-    <hr>
     <center>
     <table>
-        <tr><td>ID</td><td>客户</td><td>芯片方案</td><td>版本名称</td><td>GIT节点</td><td>Commit 时间</td><td>Comment</td><td>下载</td><td>删除</td></tr>
-        {% for version in versions %}
+        <tr><td>ID</td><td>客户</td><td>芯片方案</td><td>版本名称</td><td>发布时间</td><td>Comment</td><td>下载</td><td>删除</td></tr>
+        {% for twversion in twversions %}
         <tr>
-            <td>{{version.ver_id}}</td>
-            <td>{{version.customer}}</td>
-            <td>{{version.chip_num}}</td>
-            <td>{{version.ver_name}}</td>
-            <td>{{version.git_node}}</td>
-            <td>{{version.commit_time}}</td>
-            <td>{{version.comment}}</td>
-            <td><a href={{version.file_path}}>下载</a></td>
+            <td>{{twversion.ver_id}}</td>
+            <td>{{twversion.customer}}</td>
+            <td>{{twversion.chip_num}}</td>
+            <td>{{twversion.ver_name}}</td>
+            <td>{{twversion.release_date}}</td>
+            <td>{{twversion.comment}}</td>
+            <td><a href={{twversion.file_path}}>下载</a></td>
             <td>
-                <form action="/delete" method="POST">
-                    <input type="hidden" name="id" value={{version.ver_id}}>
+                <form action="/twdelete" method="POST">
+                    <input type="hidden" name="id" value={{twversion.ver_id}}>
                     <input type="submit" value="删除">
                 </form>
             </td>
