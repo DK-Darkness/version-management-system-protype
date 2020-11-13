@@ -8,6 +8,7 @@ from application.models.model import *
 
 import os
 import json
+import time
 
 
 engine = create_engine('sqlite:///db/sqlite3.db?check_same_thread=False', echo=True)  # 数据库连接
@@ -32,10 +33,11 @@ def add_product():
 
     f = request.files['file']
     basepath = os.path.dirname(__file__)  # 当前文件所在路径
-    upload_path = os.path.join(basepath,'../static/uploads',f.filename)  #注意：没有的文件夹一定要先创建，不然会提示没有该路径
+    filename = ''.join(f.filename.split('.')[:-1])+'_'+str(int(time.time()))+'.'+str(f.filename.split('.')[-1])
+    upload_path = os.path.join(basepath,'../static/uploads',filename)  #注意：没有的文件夹一定要先创建，不然会提示没有该路径
     f.save(upload_path)
 
-    file_path = '/static/uploads/{}'.format(f.filename)
+    file_path = '/static/uploads/{}'.format(filename)
     form = request.form.to_dict()
     version = Version(customer=form['customer'],chip_num=form['chip_num'],ver_name=form['ver_name'], \
         git_node=form['git_node'],commit_time=float(form['commit_time']),file_path=file_path, comment=form['comment'])
@@ -120,10 +122,11 @@ def add_product_tw():
 
     f = request.files['file']
     basepath = os.path.dirname(__file__)  # 当前文件所在路径
-    upload_path = os.path.join(basepath,'../static/uploads',f.filename)  #注意：没有的文件夹一定要先创建，不然会提示没有该路径
+    filename = ''.join(f.filename.split('.')[:-1])+'_'+str(int(time.time()))+'.'+str(f.filename.split('.')[-1])
+    upload_path = os.path.join(basepath,'../static/uploads',filename)  #注意：没有的文件夹一定要先创建，不然会提示没有该路径
     f.save(upload_path)
 
-    file_path = '/static/uploads/{}'.format(f.filename)
+    file_path = '/static/uploads/{}'.format(filename)
     form = request.form.to_dict()
     twversion = TWVersion(customer=form['customer'],chip_num=form['chip_num'],ver_name=form['ver_name'], \
         release_date=int(form['release_date']),file_path=file_path, comment=form['comment'])
