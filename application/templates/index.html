@@ -16,10 +16,11 @@
           top:0;
           right:0;
          }
-       </style>       
+       </style>
     <title>版本文件</title>
 </head>
 <body>
+    <!--通过form的方式请求后台-->
     <form action="/add" method='GET'>
         <input type="submit" value="添加">
     </form>
@@ -52,9 +53,9 @@
     <center>
     <table>
         <tr><td>ID</td><td>客户</td><td>芯片方案</td><td>版本名称</td><td>GIT节点</td><td>Commit 时间</td><td>Comment</td><td>下载</td><td>删除</td></tr>
-        {% for version in versions %}
+        {% for version in versions %} <!--这种格式用来处理模板引擎的逻辑代码-->
         <tr>
-            <td>{{version.ver_id}}</td>
+            <td>{{version.ver_id}}</td> <!--这种格式用来处理模板引擎的数据-->
             <td>{{version.customer}}</td>
             <td>{{version.chip_num}}</td>
             <td>{{version.ver_name}}</td>

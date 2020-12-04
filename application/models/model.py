@@ -6,7 +6,7 @@ Base = declarative_base()
 
 class Version(Base):
     
-    __tablename__ = 'version'  
+    __tablename__ = 'version'  # version表
     
     ver_id = Column(Integer, primary_key=True, autoincrement=True)  # 版本ID
     customer = Column(String(20))  # 客户名称
