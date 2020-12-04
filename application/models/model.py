@@ -13,6 +13,7 @@ class Version(Base):
     chip_num = Column(String(20))  # 芯片方案
     ver_name = Column(String(20))  # 版本名称
     git_node = Column(String(32))  # git 节点
+    git_url = Column(String(32))  # git 节点
     file_path = Column(String(256))  # 文件存放路径
     commit_time = Column(Float)  # commit 时间
     comment = Column(String(64))  # 备注

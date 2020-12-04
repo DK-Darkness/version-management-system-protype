@@ -40,7 +40,7 @@ def add_product():
     file_path = '/static/uploads/{}'.format(filename)  # 生成用于下载上传的文件的链接
     form = request.form.to_dict()  # 获取表单信息转换成python字典
     version = Version(customer=form['customer'],chip_num=form['chip_num'],ver_name=form['ver_name'], \
-        git_node=form['git_node'],commit_time=float(form['commit_time']),file_path=file_path, comment=form['comment'])  # 根据页面传过来的数据创建数据模型实例
+        git_node=form['git_node'],commit_time=float(form['commit_time']),file_path=file_path,comment=form['comment'],git_url=form['git_url'])  # 根据页面传过来的数据创建数据模型实例
     
     sessionDB.add(version)  # 存入到数据库
     sessionDB.commit()  # 保存对数据库的修改
